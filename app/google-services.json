@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "869738745284",
+    "firebase_url": "https://omani-sweets.firebaseio.com",
+    "project_id": "omani-sweets",
+    "storage_bucket": "omani-sweets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869738745284:android:0277d0c1c4dc7450",
+        "android_client_info": {
+          "package_name": "com.jawaher.omanisweets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869738745284-bapqvfcjbum6q75schfn2ifvbu32se2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jawaher.omanisweets",
+            "certificate_hash": "fdd906fa496fb1add0e7d7ce706418301fdd227b"
+          }
+        },
+        {
+          "client_id": "869738745284-iefksp975l8a76pkshfdt9dkc9i555fu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_lztjnoHSHdVGBWBKZYtIJmXpMFMsMmg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869738745284-iefksp975l8a76pkshfdt9dkc9i555fu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
