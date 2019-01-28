@@ -9,8 +9,10 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ProductDetailsActivity"></activity>
+        <activity android:name=".ProductListActivity" />
         <activity
-            android:name=".Splash"
+            android:name=".SplashActivity"
             android:theme="@style/CustomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,16 +21,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".LoginActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Register"
+            android:name=".RegisterActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Home"
+            android:name=".CustomerHomeActivity"
             android:label="Home" />
-        <activity android:name=".Profile" />
-        <activity android:name=".Order"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MyOrdersActivity" />
+        <activity android:name=".DelivererHomeActivity" />
+        <activity android:name=".AdminHomeActivity" />
+        <activity
+            android:name=".ForgetPasswordActivity"
+            android:theme="@style/CustomTheme" />
     </application>
 
 </manifest>

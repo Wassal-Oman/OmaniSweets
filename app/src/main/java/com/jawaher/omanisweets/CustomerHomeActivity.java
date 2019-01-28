@@ -1,6 +1,5 @@
 package com.jawaher.omanisweets;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,11 +18,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.jawaher.omanisweets.Models.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CustomerHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     // user name and email
     String name = "", email = "";
@@ -38,18 +38,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     // firebase authentication and database
     private FirebaseAuth auth;
-    private FirebaseFirestore database;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_customer_home);
 
         // initialize
         drawer = findViewById(R.id.drawer_layout);
         navigation = findViewById(R.id.nav_view);
         auth = FirebaseAuth.getInstance();
-        database = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // show home button with title
         if(getSupportActionBar() != null){
@@ -64,9 +64,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         // set navigation listener
         navigation.setNavigationItemSelectedListener(this);
-
-        // load user data
-        loadUserData(name, email);
     }
 
     @Override
@@ -74,47 +71,31 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         super.onStart();
 
         // get logged user
-        FirebaseUser user = auth.getCurrentUser();
+        FirebaseUser loggedUser = auth.getCurrentUser();
 
-        if(user != null) {
+        if(loggedUser != null) {
 
             // get user details
-            database.collection("users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            db.collection("users").document(loggedUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    drawer_user_name.setText(documentSnapshot.get("user_name").toString());
-                    drawer_user_email.setText(documentSnapshot.get("user_email").toString());
+
+                    // retrieve user data
+                    User user = documentSnapshot.toObject(User.class);
+
+                    // check if user exists
+                    if(user != null) {
+                        drawer_user_name.setText(user.getName());
+                        drawer_user_email.setText(user.getEmail());
+                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Home.this, "Cannot find looged user due to " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    auth.signOut();
+                    finish();
                 }
             });
-        }
-    }
-
-    private void loadUserData(String name, String email) {
-        // check for shared preferences
-        SharedPreferences sp = getSharedPreferences("USER", MODE_PRIVATE);
-        String data = sp.getString("user", "");
-
-        // check of there is any available data
-        if(!data.equals("")) {
-            try {
-                JSONObject jsonObject = new JSONObject(data);
-
-                // get user name
-                name = jsonObject.getString("user_name");
-                email = jsonObject.getString("user_email");
-
-                // set drawer views
-                drawer_user_name.setText(name);
-                drawer_user_email.setText(email);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -145,7 +126,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Toast.makeText(this, "Profile page will be available very soon!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ProfileActivity page will be available very soon!", Toast.LENGTH_SHORT).show();
         } else if(id == R.id.nav_orders) {
             Toast.makeText(this, "Orders page will be available very soon!", Toast.LENGTH_SHORT).show();
         } else if(id == R.id.nav_exit) {

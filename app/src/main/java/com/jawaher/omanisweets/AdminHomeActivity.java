@@ -3,11 +3,11 @@ package com.jawaher.omanisweets;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Order extends AppCompatActivity {
+public class AdminHomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_admin_home);
     }
 }

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register"
+    tools:context=".RegisterActivity"
     tools:layout_editor_absoluteY="25dp">
 
     <EditText
@@ -70,27 +69,44 @@
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textSize="7pt"
-        app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
+        app:layout_constraintBottom_toTopOf="@+id/et_confirm_password"
         app:layout_constraintEnd_toEndOf="@+id/et_phone"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/et_phone"
         app:layout_constraintTop_toBottomOf="@+id/et_phone" />
 
-    <Button
-        android:id="@+id/btn_sign_up"
+    <EditText
+        android:id="@+id/et_confirm_password"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button"
-        android:text="Sign Up"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:onClick="register"
-        app:layout_constraintBottom_toTopOf="@+id/btn_back"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit_text"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textSize="7pt"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
         app:layout_constraintEnd_toEndOf="@+id/et_password"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/et_password"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button"
+        android:onClick="register"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@+id/btn_back"
+        app:layout_constraintEnd_toEndOf="@+id/et_confirm_password"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/et_confirm_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_confirm_password" />
 
     <Button
         android:id="@+id/btn_back"
@@ -98,13 +114,14 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_outline"
+        android:onClick="backToLogin"
         android:text="Back"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
-        android:onClick="backToLogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_sign_up"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btn_sign_up"
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
+
 </android.support.constraint.ConstraintLayout>

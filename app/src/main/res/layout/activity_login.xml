@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -23,7 +23,7 @@
         android:id="@+id/et_email"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Email"
@@ -57,12 +57,12 @@
         android:id="@+id/btn_sign_in"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/button"
+        android:onClick="login"
         android:text="Sign In"
         android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:onClick="login"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
         app:layout_constraintEnd_toEndOf="@+id/et_password"
         app:layout_constraintHorizontal_bias="0.5"
@@ -74,16 +74,31 @@
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/button_outline"
+        android:onClick="register"
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
-        android:onClick="register"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_forget_password"
         app:layout_constraintEnd_toEndOf="@+id/btn_sign_in"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/btn_sign_in"
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
+
+    <TextView
+        android:id="@+id/tv_forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginTop="16dp"
+        android:text="I forgot my password"
+        android:textColor="@color/colorBlack"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="goToForgetPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_sign_up"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/btn_sign_up"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
 
 </android.support.constraint.ConstraintLayout>
