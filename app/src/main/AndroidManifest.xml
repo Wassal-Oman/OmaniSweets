@@ -9,8 +9,10 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProductDetailsActivity"></activity>
-        <activity android:name=".ProductListActivity" />
+        <activity android:name=".ProductDetailsActivity"/>
+        <activity
+            android:name=".ProductListActivity"
+            android:theme="@style/CustomTheme"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/CustomTheme">

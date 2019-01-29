@@ -1,5 +1,6 @@
 package com.jawaher.omanisweets;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -150,26 +151,38 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
     }
 
     public void selectBirthday(View view) {
-        Toast.makeText(this, "Birthday", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductListActivity.class);
+        intent.putExtra("category", "Birthday");
+        startActivity(intent);
     }
 
     public void selectCupcake(View view) {
-        Toast.makeText(this, "Cupcake", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductListActivity.class);
+        intent.putExtra("category", "Cupcake");
+        startActivity(intent);
     }
 
     public void selectCandy(View view) {
-        Toast.makeText(this, "Candy", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductListActivity.class);
+        intent.putExtra("category", "Candy");
+        startActivity(intent);
     }
 
     public void selectBlueberry(View view) {
-        Toast.makeText(this, "Blueberry", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductListActivity.class);
+        intent.putExtra("category", "Blueberry");
+        startActivity(intent);
     }
 
     public void selectDonut(View view) {
-        Toast.makeText(this, "Donut", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductListActivity.class);
+        intent.putExtra("category", "Donut");
+        startActivity(intent);
     }
 
     public void selectIcecream(View view) {
-        Toast.makeText(this, "Ice Cream", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductListActivity.class);
+        intent.putExtra("category", "IceCream");
+        startActivity(intent);
     }
 }
