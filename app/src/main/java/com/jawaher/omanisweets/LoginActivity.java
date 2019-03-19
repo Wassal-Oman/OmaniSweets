@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // check if user still logged in
         if(auth.getCurrentUser() != null) {
-            startActivity(new Intent(this, CustomerHomeActivity.class));
+            startActivity(new Intent(this, HomeActivity.class));
         }
     }
 
@@ -109,29 +109,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                     // check if user exists
                                     if(user != null) {
-
-                                        // check user type
-                                        switch (user.getType()) {
-                                            case "Customer": {
-                                                Toast.makeText(LoginActivity.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(LoginActivity.this, CustomerHomeActivity.class));
-                                            }
-                                            break;
-                                            case "Admin": {
-                                                Toast.makeText(LoginActivity.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
-                                            }
-                                            break;
-                                            case "Deliverer": {
-                                                Toast.makeText(LoginActivity.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(LoginActivity.this, DelivererHomeActivity.class));
-                                            }
-                                            break;
-                                            default: {
-                                                Toast.makeText(LoginActivity.this, "User type is unknown", Toast.LENGTH_SHORT).show();
-                                                auth.signOut();
-                                            }
-                                        }
+                                        Toast.makeText(LoginActivity.this, "Welcome " + user.getName(), Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Cannot retrieve user data", Toast.LENGTH_SHORT).show();
                                     }

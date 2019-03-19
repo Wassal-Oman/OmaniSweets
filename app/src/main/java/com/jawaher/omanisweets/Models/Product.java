@@ -7,7 +7,6 @@ public class Product {
     private String price;
     private String image;
     private String category;
-    private String isDeliveryAvailable;
 
     // constructors
     public Product() {
@@ -19,7 +18,6 @@ public class Product {
         this.price = price;
         this.image = image;
         this.category = category;
-        this.isDeliveryAvailable = isDeliveryAvailable;
     }
 
     // getters and setters
@@ -53,13 +51,5 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getIsDeliveryAvailable() {
-        return isDeliveryAvailable;
-    }
-
-    public void setIsDeliveryAvailable(String isDeliveryAvailable) {
-        this.isDeliveryAvailable = isDeliveryAvailable;
     }
 }

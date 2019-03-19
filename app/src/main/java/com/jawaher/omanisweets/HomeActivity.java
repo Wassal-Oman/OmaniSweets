@@ -21,13 +21,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jawaher.omanisweets.Models.User;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class CustomerHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    // user name and email
-    String name = "", email = "";
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     // widgets
     TextView drawer_user_name;
@@ -41,10 +35,13 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
     private FirebaseAuth auth;
     private FirebaseFirestore db;
 
+    // attributes
+    String name = "", phone = "", email = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_home);
+        setContentView(R.layout.activity_home);
 
         // initialize
         drawer = findViewById(R.id.drawer_layout);
@@ -88,6 +85,15 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
                     if(user != null) {
                         drawer_user_name.setText(user.getName());
                         drawer_user_email.setText(user.getEmail());
+
+                        // set parameters
+                        name = user.getName();
+                        email = user.getEmail();
+                        phone = user.getPhone();
+
+                        // store data inside shared preferences
+                        storeUserData(user.getName(), user.getPhone());
+
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -127,9 +133,13 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Toast.makeText(this, "ProfileActivity page will be available very soon!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("name", name);
+            intent.putExtra("email", email);
+            intent.putExtra("phone", phone);
+            startActivity(intent);
         } else if(id == R.id.nav_orders) {
-            Toast.makeText(this, "Orders page will be available very soon!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MyOrdersActivity.class));
         } else if(id == R.id.nav_exit) {
             // sign out
             auth.signOut();
@@ -184,5 +194,15 @@ public class CustomerHomeActivity extends AppCompatActivity implements Navigatio
         Intent intent = new Intent(this, ProductListActivity.class);
         intent.putExtra("category", "IceCream");
         startActivity(intent);
+    }
+
+    // method to store user data
+    private void storeUserData(String name, String phone) {
+        // store data into a Shared Preferences
+        SharedPreferences sp = getSharedPreferences("USER", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("name", name);
+        editor.putString("phone", phone);
+        editor.apply();
     }
 }

@@ -2,15 +2,19 @@ package com.jawaher.omanisweets;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -51,6 +55,11 @@ public class ProductListActivity extends AppCompatActivity {
         products = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
 
+        // check for action bar
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         // get passed data
         if(getIntent() != null) {
             category = getIntent().getStringExtra("category");
@@ -60,12 +69,22 @@ public class ProductListActivity extends AppCompatActivity {
         loadProducts();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void loadProducts() {
 
         // get products from Firebase Database
+        final ProgressDialog dialog = ProgressDialog.show(this, "Loading Products", "Please wait...", false, false);
         db.collection("products").whereEqualTo("category", category).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                dialog.dismiss();
                 if(task.isSuccessful()) {
                     for(QueryDocumentSnapshot document : task.getResult()) {
 
@@ -89,10 +108,28 @@ public class ProductListActivity extends AppCompatActivity {
         });
     }
 
-    private void viewProducts(List<Product> products) {
+    private void viewProducts(final List<Product> products) {
         adapter = new MyAdapter(this, null, products);
         lvProducts.setDivider(null);
         lvProducts.setAdapter(adapter);
+
+        // item click listener
+        lvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // get product based on user selection
+                Product product = products.get(position);
+
+                // go to details page
+                Intent intent = new Intent(ProductListActivity.this, ProductDetailsActivity.class);
+                intent.putExtra("name", product.getName());
+                intent.putExtra("price", product.getPrice());
+                intent.putExtra("image", product.getImage());
+                intent.putExtra("category", product.getCategory());
+                startActivity(intent);
+            }
+        });
     }
 
     // private class to view data in ListView
@@ -150,7 +187,7 @@ public class ProductListActivity extends AppCompatActivity {
             } else {
                 product = data.get(i);
                 holder.name.setText(product.getName());
-                holder.price.setText(product.getPrice());
+                holder.price.setText(product.getPrice() + " OMR");
                 Picasso.get()
                         .load(product.getImage())
                         .resize(350, 300)

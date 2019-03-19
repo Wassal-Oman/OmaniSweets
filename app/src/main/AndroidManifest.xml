@@ -9,10 +9,13 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProductDetailsActivity"/>
+        <activity
+            android:name=".PaymentActivity"
+            android:label="Payment Details" />
+        <activity android:name=".ProductDetailsActivity" />
         <activity
             android:name=".ProductListActivity"
-            android:theme="@style/CustomTheme"/>
+            android:label="Products List" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/CustomTheme">
@@ -29,12 +32,14 @@
             android:name=".RegisterActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".CustomerHomeActivity"
+            android:name=".HomeActivity"
             android:label="Home" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MyOrdersActivity" />
-        <activity android:name=".DelivererHomeActivity" />
-        <activity android:name=".AdminHomeActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="My Profile"/>
+        <activity
+            android:name=".MyOrdersActivity"
+            android:label="My Orders"/>
         <activity
             android:name=".ForgetPasswordActivity"
             android:theme="@style/CustomTheme" />
